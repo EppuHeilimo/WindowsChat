@@ -1,0 +1,16 @@
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe.config
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.pdb
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\Chat.csprojResolveAssemblyReference.cache
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.g.cs
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\App.g.cs
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.cache
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.lref
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.baml
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.g.resources
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.Properties.Resources.resources
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\Chat.csproj.GenerateResource.Cache
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
+c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
+C:\Users\Eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\ConnectWindow.g.cs
+C:\Users\Eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\ConnectWindow.baml
