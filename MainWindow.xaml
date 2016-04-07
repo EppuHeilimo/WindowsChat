@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfApplication1.MainWindow"
+﻿<Window x:Class="WindowsChat.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
 
     <Window.Resources>
         <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FFFFFF"/>
@@ -61,7 +61,7 @@
                 <MenuItem Header="Add server to bookmarks"/>
                 <MenuItem Header="Modify bookmarks"/>
             </MenuItem>
-            <MenuItem Header="Settings">
+            <MenuItem Header="Settings" Click="MenuItem_Click">
             </MenuItem>
             <MenuItem Header="History">
             </MenuItem>
@@ -73,7 +73,7 @@
             </MenuItem>
         </Menu>
         <TabControl x:Name="TabContainer" Margin="0,3,0,0" Grid.Row="1" SelectionChanged="tabDynamic_SelectionChanged">
-            <TabItem Header="Channel 1">
+            <TabItem Header="Default Channel">
                 <Grid Background="#FFE5E5E5">
                     <ScrollViewer>
                         <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>

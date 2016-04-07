@@ -1,20 +1,20 @@
-﻿WpfApplication1
+﻿WindowsChat
 
 
 winexe
 C#
 .cs
 Z:\Dox\Repos\WindowsChat\obj\Debug\
-WpfApplication1
+WindowsChat
 none
 false
 DEBUG;TRACE
 Z:\Dox\Repos\WindowsChat\App.xaml
 21463638958
 
-10-2126482122
+8890464999
 13738642453
 ConnectWindow.xaml;MainWindow.xaml;
 
-True
+False
 

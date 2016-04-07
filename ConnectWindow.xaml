@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication1.ConnectWindow"
+﻿<Window x:Class="WindowsChat.ConnectWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,17 +18,17 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Label>IP address: </Label>
-            <TextBox MinWidth="120" MaxLength="20" MaxWidth="120"></TextBox>
+            <TextBox x:Name="ipBox" MinWidth="120" MaxLength="20" MaxWidth="120"></TextBox>
             <Label>Port: </Label>
-            <TextBox MaxLength="5" MinWidth="60"></TextBox>
+            <TextBox x:Name="portBox" MaxLength="5" MinWidth="60"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <Label>Channel name:</Label>
-            <TextBox MinWidth="190" MaxWidth="190" MaxLength="20"></TextBox>
+            <TextBox x:Name="channelBox" MinWidth="190" MaxWidth="190" MaxLength="20"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Label>Your nickname: </Label>
-            <TextBox MinWidth="185" MaxWidth="185" MaxLength="16"></TextBox>
+            <TextBox x:Name="nickBox" MinWidth="185" MaxWidth="185" MaxLength="16"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="6">
             <Button x:Name="BtnConnect" Margin="85,0,10,0" Click="BtnConnect_OnClick">Connect</Button>

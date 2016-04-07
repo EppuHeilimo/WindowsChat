@@ -13,14 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApplication1
+namespace WindowsChat
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<TabItem> tabs = new List<TabItem>();
+        
+        static public List<TabItem> tabs = new List<TabItem>();
         private string ChatContent;
         public MainWindow()
         {
@@ -34,12 +35,10 @@ namespace WpfApplication1
 
         private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            ConnectWindow connect = new ConnectWindow();
-            connect.Show();
-            addTab();
+            ConnectWindow connectWindow = new ConnectWindow(this);
+            connectWindow.Show();
         }
-
-        private void addTab()
+        public void addTab()
         {
             try
             {
@@ -47,13 +46,12 @@ namespace WpfApplication1
                 Grid newGrid = new Grid();
                 ScrollViewer newScrollViewer = new ScrollViewer();
                 TextBlock newTextBlock = new TextBlock();
-                tabs.Add(newTab);
-                newTab.Header = "Channel " + tabs.Count;
+                newTab.Header = BLChannels.connections[0].channelname;
                 newGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xE5, 0xE5, 0xE5));
                 newScrollViewer.Content = newTextBlock;
                 newGrid.Children.Add(newScrollViewer);
                 newTab.Content = newGrid;
-                TabContainer.Items.Insert(0, newTab);
+
             }
             catch (Exception ex)
             {
@@ -71,6 +69,19 @@ namespace WpfApplication1
         private void BtnSend_OnClick(object sender, RoutedEventArgs e)
         {
             ChatContent += MessageBox.Text;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach (var item in BLChannels.connections)
+            {
+                item.closing = true;
+            }
         }
     }
 }
