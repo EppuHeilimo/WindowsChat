@@ -29,7 +29,7 @@ namespace WindowsChat
 
         private void BtnConnect_OnClick(object sender, RoutedEventArgs e)
         {
-            BLConnection connection = new BLConnection(ipBox.Text, portBox.Text, channelBox.Text, nickBox.Text);
+            BLConnection connection = new BLConnection(ipBox.Text, Convert.ToInt32(portBox.Text), channelBox.Text, nickBox.Text);
             BLChannels.connections.Insert(0, connection);
 
             parentwindow.addTab();

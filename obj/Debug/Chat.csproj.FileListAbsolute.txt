@@ -1,36 +1,19 @@
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe.config
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.pdb
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\Chat.csprojResolveAssemblyReference.cache
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.g.cs
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\App.g.cs
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.cache
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1_MarkupCompile.lref
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\MainWindow.baml
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.g.resources
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.Properties.Resources.resources
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\Chat.csproj.GenerateResource.Cache
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
-c:\users\eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
-C:\Users\Eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\ConnectWindow.g.cs
-C:\Users\Eppu\documents\visual studio 2015\Projects\WpfApplication1\WpfApplication1\obj\Debug\ConnectWindow.baml
-Z:\Dox\Repos\WindowsChat\obj\Debug\Chat.csprojResolveAssemblyReference.cache
-Z:\Dox\Repos\WindowsChat\obj\Debug\ConnectWindow.g.cs
-Z:\Dox\Repos\WindowsChat\obj\Debug\MainWindow.g.cs
-Z:\Dox\Repos\WindowsChat\obj\Debug\App.g.cs
-Z:\Dox\Repos\WindowsChat\obj\Debug\ConnectWindow.baml
-Z:\Dox\Repos\WindowsChat\obj\Debug\MainWindow.baml
-Z:\Dox\Repos\WindowsChat\obj\Debug\Chat.csproj.GenerateResource.Cache
-Z:\Dox\Repos\WindowsChat\bin\Debug\WindowsChat.exe.config
-Z:\Dox\Repos\WindowsChat\bin\Debug\WindowsChat.exe.manifest
-Z:\Dox\Repos\WindowsChat\bin\Debug\WindowsChat.application
-Z:\Dox\Repos\WindowsChat\bin\Debug\WindowsChat.exe
-Z:\Dox\Repos\WindowsChat\bin\Debug\WindowsChat.pdb
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat_MarkupCompile.cache
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat_MarkupCompile.lref
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat.g.resources
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat.Properties.Resources.resources
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat.exe.manifest
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat.application
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat.exe
-Z:\Dox\Repos\WindowsChat\obj\Debug\WindowsChat.pdb
+C:\Users\Eppu\Source\Repos\WindowsChat\bin\Debug\WindowsChat.exe.config
+C:\Users\Eppu\Source\Repos\WindowsChat\bin\Debug\WindowsChat.exe.manifest
+C:\Users\Eppu\Source\Repos\WindowsChat\bin\Debug\WindowsChat.application
+C:\Users\Eppu\Source\Repos\WindowsChat\bin\Debug\WindowsChat.exe
+C:\Users\Eppu\Source\Repos\WindowsChat\bin\Debug\WindowsChat.pdb
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\ConnectWindow.g.cs
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\MainWindow.g.cs
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\App.g.cs
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat_MarkupCompile.cache
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat_MarkupCompile.lref
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\ConnectWindow.baml
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\MainWindow.baml
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.g.resources
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.Properties.Resources.resources
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\Chat.csproj.GenerateResource.Cache
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.exe.manifest
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.application
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.exe
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.pdb

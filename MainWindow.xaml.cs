@@ -23,6 +23,8 @@ namespace WindowsChat
         
         static public List<TabItem> tabs = new List<TabItem>();
         private string ChatContent;
+        private Dictionary<string, BLConnection> channels = new Dictionary<string, BLConnection>();
+        private int currentChannel = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace WindowsChat
 
         private void tabDynamic_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            currentChannel = TabContainer.SelectedIndex;
             
         }
 
@@ -68,7 +71,7 @@ namespace WindowsChat
 
         private void BtnSend_OnClick(object sender, RoutedEventArgs e)
         {
-            ChatContent += MessageBox.Text;
+            
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

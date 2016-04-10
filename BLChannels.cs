@@ -11,7 +11,5 @@ namespace WindowsChat
     static class BLChannels
     {
         static public List<BLConnection> connections = new List<BLConnection>();
-
-
     }
 }
