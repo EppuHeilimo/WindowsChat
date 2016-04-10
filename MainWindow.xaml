@@ -75,8 +75,8 @@
         <TabControl x:Name="TabContainer" Margin="0,3,0,0" Grid.Row="1" SelectionChanged="tabDynamic_SelectionChanged">
             <TabItem Header="Default Channel">
                 <Grid Background="#FFE5E5E5">
-                    <ScrollViewer>
-                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                    <ScrollViewer x:Name="Scroll">
+                        <TextBlock x:Name="ChannelTextBlock" HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>

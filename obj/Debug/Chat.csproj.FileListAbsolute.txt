@@ -17,3 +17,4 @@ C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.exe.manifest
 C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.application
 C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.exe
 C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\WindowsChat.pdb
+C:\Users\Eppu\Source\Repos\WindowsChat\obj\Debug\Chat.csprojResolveAssemblyReference.cache

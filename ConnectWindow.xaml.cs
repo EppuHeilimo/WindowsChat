@@ -29,10 +29,24 @@ namespace WindowsChat
 
         private void BtnConnect_OnClick(object sender, RoutedEventArgs e)
         {
-            BLConnection connection = new BLConnection(ipBox.Text, Convert.ToInt32(portBox.Text), channelBox.Text, nickBox.Text);
-            BLChannels.connections.Insert(0, connection);
+            try
+            {
+                if (ipBox.Text != "" && portBox.Text != "" && channelBox.Text != "" && nickBox.Text != "")
+                {
+                    BLChannels.connections.Insert(0, new BLConnection(ipBox.Text, Convert.ToInt32(portBox.Text), channelBox.Text, nickBox.Text));
+                    parentwindow.addTab();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Missing information");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
 
-            parentwindow.addTab();
         }
 
         private void BtnCancel_OnClick(object sender, RoutedEventArgs e)
@@ -40,6 +54,11 @@ namespace WindowsChat
           //  Application.Current.MainWindow = new ConnectWindow();
           //  Application.Current.MainWindow.Show();
             Close();
+        }
+
+        private void BtnNewServer_OnClick(object sender, RoutedEventArgs e)
+        {
+            BLChannels.myServer = new Server(Convert.ToInt32(portBox.Text), channelBox.Text);
         }
     }
 }

@@ -23,17 +23,16 @@ namespace WindowsChat
         
         static public List<TabItem> tabs = new List<TabItem>();
         private string ChatContent;
-        private Dictionary<string, BLConnection> channels = new Dictionary<string, BLConnection>();
-        private int currentChannel = 0;
+       
         public MainWindow()
         {
             InitializeComponent();
+            BLChannels.MainWindow = this;
         }
 
         private void tabDynamic_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            currentChannel = TabContainer.SelectedIndex;
-            
+            BLChannels.setCurrentChannel(TabContainer.SelectedIndex); 
         }
 
         private void BtnAdd_OnClick(object sender, RoutedEventArgs e)
@@ -54,6 +53,9 @@ namespace WindowsChat
                 newScrollViewer.Content = newTextBlock;
                 newGrid.Children.Add(newScrollViewer);
                 newTab.Content = newGrid;
+                TabContainer.Items.Insert(0, newTab);
+                TabContainer.SelectedIndex = 0;
+
 
             }
             catch (Exception ex)
@@ -61,17 +63,13 @@ namespace WindowsChat
                 System.Windows.MessageBox.Show(ex.Message);
             }
 
-            /*
-                 <Grid Background="#FFE5E5E5">
-                    <ScrollViewer>
-                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
-                    </ScrollViewer>
-            */
         }
 
         private void BtnSend_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            if(MessageBox.Text != "")
+                BLChannels.connections[BLChannels.currentChannel].sendTCP("1" + MessageBox.Text);
+            BLChannels.changeChatContent();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -85,6 +83,8 @@ namespace WindowsChat
             {
                 item.closing = true;
             }
+            if(BLChannels.myServer != null)
+                BLChannels.myServer.close();
         }
     }
 }

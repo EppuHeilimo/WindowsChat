@@ -28,11 +28,19 @@ namespace WindowsChat
         private Int32 port;
         private Thread server;
         private bool closing = false;
+        TcpListener listener;
+
+        public Server()
+        {
+            
+        }
+
         public Server(Int32 port, string defaultname)
         {
             this.port = port;
             defaultName = defaultname;
             server = new Thread(new ThreadStart(run));
+            server.Start();
         }
 
         public void run()
@@ -40,86 +48,112 @@ namespace WindowsChat
             try
             {
                 IPAddress address = IPAddress.Parse("127.0.0.1");
-                TcpListener listener = new TcpListener(address, port);
+                listener = new TcpListener(address, port);
                 listener.Start();
-                while (true)
-                {
-                    try
-                    {
-                        Socket s = listener.AcceptSocket();
-                        byte[] message = new byte[255];
-                        int count = s.Receive(message);
-                        PacketType type = parsePacketType(message);
-                        string msg = parseMessage(message);
-
-                        switch (type)
-                        {
-                            case PacketType.LOGIN:
-                                connectedUsers.Add(msg, s);
-                                broadcast(msg + " connected!");
-                                break;
-                            case PacketType.DISCONNECT:
-                                connectedUsers.Remove(msg);
-                                broadcast(msg + " disconnected!");
-                                break;
-                            case PacketType.MESSAGE:
-                                foreach (KeyValuePair<string, Socket> item in connectedUsers)
-                                {
-                                    if (item.Value == s)
-                                    {
-                                        broadcast(item.Key + ": " + msg);
-                                    }
-                                }
-                                break;
-                            case PacketType.INVALID:
-                                MessageBox.Show("INVALID PACKET: " + msg);
-                                break;
-                        }
-
-                        if (closing)
-                        {
-                            closeSockets();
-                            break;
-                        }
-
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                    }
-
-                   
-                }
-                listener.Stop();
+                MessageBox.Show("Server created");
+                StartAccept();
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.StackTrace);
             }
+        }
+
+        private void StartAccept()
+        {
+            listener.BeginAcceptSocket(HandleAsyncConnection, listener);
+
+        }
+
+        private void HandleAsyncConnection(IAsyncResult result)
+        {
+            
+            StartAccept();
+            Socket client = listener.EndAcceptSocket(result);
+
+            while (true)
+            {
+                try
+                {
+                    byte[] message = new byte[255];
+                    int count = client.Receive(message);
+                    PacketType type = parsePacketType(message);
+                    string msg = parseMessage(message);
+
+                    switch (type)
+                    {
+                        case PacketType.LOGIN:
+                            connectedUsers.Add(msg, client);
+                            broadcast(msg + " connected!");
+                            break;
+                        case PacketType.DISCONNECT:
+                            connectedUsers.Remove(msg);
+                            broadcast(msg + " disconnected!");
+                            break;
+                        case PacketType.MESSAGE:
+                            foreach (KeyValuePair<string, Socket> item in connectedUsers)
+                            {
+                                if (item.Value == client)
+                                {
+                                    broadcast(item.Key + ": " + msg);
+                                }
+                            }
+                            break;
+                        case PacketType.INVALID:
+                            MessageBox.Show("INVALID PACKET: " + msg);
+                            break;
+                    }
+
+                    if (closing)
+                    {
+                        closeSockets();
+                        break;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.StackTrace);
+                }
+
+
+            }
+            listener.Stop();
+
         }
 
         private PacketType parsePacketType(byte[] data)
         {
-            string message = Convert.ToString(data);
-            string type = message.Substring(0, 1);
-            int packet = Int32.Parse(type);
-            switch (packet)
+            try
             {
-                case 0:
-                    return PacketType.LOGIN;
-                case 1:
-                    return PacketType.MESSAGE;
-                case 2:
-                    return PacketType.DISCONNECT;
+                string message = System.Text.Encoding.Default.GetString(data);
+                string type = message.Substring(0, 1);
+                int packet = Convert.ToInt32(type);
+                switch (packet)
+                {
+                    case 0:
+                        return PacketType.LOGIN;
+                    case 1:
+                        return PacketType.MESSAGE;
+                    case 2:
+                        return PacketType.DISCONNECT;
+                }
+                return PacketType.INVALID;
             }
-            return PacketType.INVALID;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return PacketType.INVALID;
+            }
+
         }
 
         private string parseMessage(byte[] data)
         {
-            string message = Convert.ToString(data);
-            return message.Substring(1);
+            string message = System.Text.Encoding.Default.GetString(data);
+            int end = message.IndexOf("\0") - 1;
+            return message.Substring(1, end);
         }
 
         public void broadcast(string msg)
@@ -134,7 +168,7 @@ namespace WindowsChat
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.StackTrace);
                 }
             }
 
@@ -146,6 +180,12 @@ namespace WindowsChat
                 user.Value.Close();               
             }
             connectedUsers.Clear();
+            listener.Stop();
+        }
+
+        public void close()
+        {
+            closing = true;
         }
     }
 

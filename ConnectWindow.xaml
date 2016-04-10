@@ -18,21 +18,23 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Label>IP address: </Label>
-            <TextBox x:Name="ipBox" MinWidth="120" MaxLength="20" MaxWidth="120"></TextBox>
+            <TextBox x:Name="ipBox" MinWidth="120" MaxLength="20" MaxWidth="120" Text="127.0.0.1"></TextBox>
             <Label>Port: </Label>
-            <TextBox x:Name="portBox" MaxLength="5" MinWidth="60"></TextBox>
+            <TextBox x:Name="portBox" MaxLength="5" MinWidth="60" Text="3000"></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" >
             <Label>Channel name:</Label>
-            <TextBox x:Name="channelBox" MinWidth="190" MaxWidth="190" MaxLength="20"></TextBox>
+            <TextBox x:Name="channelBox" MinWidth="190" MaxWidth="190" MaxLength="20" Text="Default"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Label>Your nickname: </Label>
-            <TextBox x:Name="nickBox" MinWidth="185" MaxWidth="185" MaxLength="16"></TextBox>
+            <TextBox x:Name="nickBox" MinWidth="185" MaxWidth="185" MaxLength="16" Text="User"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="6">
-            <Button x:Name="BtnConnect" Margin="85,0,10,0" Click="BtnConnect_OnClick">Connect</Button>
-            <Button x:Name="BtnCancel" Margin="0,0,0,0" Click="BtnCancel_OnClick">Cancel</Button>
+            <Button x:Name="BtnConnect" Margin="55,0,10,0" Click="BtnConnect_OnClick">Connect</Button>
+            <Button x:Name="BtnNewServer" Margin="0,0,0,0" Click="BtnNewServer_OnClick">New Server</Button>
+            <Button x:Name="BtnCancel" Margin="10,0,0,0" Click="BtnCancel_OnClick">Cancel</Button>
+            
         </StackPanel>
     </Grid>
 </Window>
