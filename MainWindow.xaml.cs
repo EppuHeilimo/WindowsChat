@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,6 @@ namespace WindowsChat
     /// </summary>
     public partial class MainWindow : Window
     {
-        
         static public List<TabItem> tabs = new List<TabItem>();
         private string ChatContent;
        
@@ -40,7 +40,7 @@ namespace WindowsChat
             ConnectWindow connectWindow = new ConnectWindow(this);
             connectWindow.Show();
         }
-        public void addTab()
+        public TabItem addTab()
         {
             try
             {
@@ -50,26 +50,46 @@ namespace WindowsChat
                 TextBlock newTextBlock = new TextBlock();
                 newTab.Header = BLChannels.connections[0].channelname;
                 newGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xE5, 0xE5, 0xE5));
+                newTextBlock.Name = BLChannels.connections[0].channelname + "TextBlock"; 
+                newTextBlock.TextWrapping = TextWrapping.Wrap;
                 newScrollViewer.Content = newTextBlock;
                 newGrid.Children.Add(newScrollViewer);
                 newTab.Content = newGrid;
                 TabContainer.Items.Insert(0, newTab);
                 TabContainer.SelectedIndex = 0;
-
+                return newTab;
 
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message);
             }
-
+            return null;
         }
 
         private void BtnSend_OnClick(object sender, RoutedEventArgs e)
         {
-            if(MessageBox.Text != "")
-                BLChannels.connections[BLChannels.currentChannel].sendTCP("1" + MessageBox.Text);
-            BLChannels.changeChatContent();
+
+            handleSend();
+
+        }
+
+        private void handleSend()
+        {
+            if (TabContainer.SelectedIndex != BLChannels.connections.Count)
+            {
+                if (MessageBox.Text == "/quit" || MessageBox.Text == "/disconnect" || MessageBox.Text == "/exit")
+                {
+                    BLChannels.disconnect();
+                }
+                else if (MessageBox.Text != "")
+                    BLChannels.connections[BLChannels.currentChannel].sendTCP("1" + MessageBox.Text);
+            }
+            else
+            {
+                ChannelTextBlock.Text += "Cannot send messages to this channel!\n";
+            }
+            MessageBox.Text = "";
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -81,10 +101,18 @@ namespace WindowsChat
         {
             foreach (var item in BLChannels.connections)
             {
-                item.closing = true;
+                item.close();
             }
             if(BLChannels.myServer != null)
                 BLChannels.myServer.close();
+        }
+
+        private void MessageBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                handleSend();
+            }
         }
     }
 }

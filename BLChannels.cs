@@ -21,15 +21,20 @@ namespace WindowsChat
         {
             try
             {
+                //Add all the received messages to one string seperated by \n
                 string str = "";
                 List<string> ChatContent = connections[currentChannel].getChatContent();
                 foreach (string s in ChatContent)
                 {
                     str += s + "\n";
                 }
-
-                MainWindow.ChannelTextBlock.Text = str;
+                //Lets find the textblock in the currentchannel, this can be done because we know what the tab contains so everything can be casted to right controls.
+                Grid grid = (Grid)connections[currentChannel].tab.Content;
+                ScrollViewer scroll = (ScrollViewer)grid.Children[0];
+                TextBlock block = (TextBlock)scroll.Content;
+                block.Text = str;
                 MainWindow.Scroll.ScrollToBottom();
+
             }
             catch (Exception ex)
             {
@@ -41,6 +46,13 @@ namespace WindowsChat
         public static void setCurrentChannel(int id)
         {
             currentChannel = id;
+        }
+
+        public static void disconnect()
+        {
+            MainWindow.TabContainer.Items.Remove(connections[currentChannel].tab);
+            connections[currentChannel].disconnect();
+            connections.RemoveAt(currentChannel);
         }
     }
 }

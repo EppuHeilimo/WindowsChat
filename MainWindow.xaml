@@ -27,7 +27,7 @@
                                 <RowDefinition x:Name="RowDefinition1" Height="*"/>
                             </Grid.RowDefinitions>
                             <!-- Had to edit this to get tab working as a button without any padding-->
-                            <DockPanel x:Name="headerPanel" Background="Transparent" Grid.Column="0" IsItemsHost="true" Margin="2,2,2,0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" />
+                            <DockPanel x:Name="headerPanel" Background="Transparent" Grid.Column="0" IsItemsHost="true" Margin="0,0,0,0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" />
                             <Border x:Name="contentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
                                 <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </Border>
@@ -80,7 +80,7 @@
                     </ScrollViewer>
                 </Grid>
             </TabItem>
-            <TabItem MinWidth="20">
+            <TabItem MinWidth="20" Margin="-3,0,0,0">
                 <TabItem.Template>
                     <ControlTemplate>
                         <Button x:Name="BtnAdd" Click="BtnAdd_OnClick" FontSize="8">+</Button>
@@ -93,7 +93,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="75"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="MessageBox" Margin="0,0,0,0" TextWrapping="Wrap" Text="" MaxHeight="20" MinHeight="25" Grid.Row="2" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Column="0"/>
+            <TextBox x:Name="MessageBox" Margin="0,0,0,0" TextWrapping="Wrap" Text="" MaxHeight="20" MinHeight="25" Grid.Row="2" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Grid.Column="0" MaxLength="250" KeyDown="MessageBox_OnKeyDown"/>
             <Button x:Name="BtnSend" Click="BtnSend_OnClick" Content="Send" MinWidth="75" MaxHeight="25" Grid.Row="2" HorizontalAlignment="Right" Grid.Column="1" Margin="0, 0, 0, 0"/>
         </Grid>
 

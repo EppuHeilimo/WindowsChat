@@ -20,13 +20,13 @@ namespace WindowsChat
             MESSAGE = 1,
             DISCONNECT = 2,
             INVALID = 3
-
         }
 
-        private Dictionary<string, Socket> connectedUsers = new Dictionary<string, Socket>();
+        private Dictionary<string, TcpClient> connectedUsers = new Dictionary<string, TcpClient>();
         private string defaultName;
         private Int32 port;
         private Thread server;
+        private List<NetworkStream> streams = new List<NetworkStream>(); 
         private bool closing = false;
         TcpListener listener;
 
@@ -39,8 +39,9 @@ namespace WindowsChat
         {
             this.port = port;
             defaultName = defaultname;
-            server = new Thread(new ThreadStart(run));
-            server.Start();
+            //server = new Thread(new ThreadStart(run));
+            //server.Start();
+            run();
         }
 
         public void run()
@@ -48,7 +49,7 @@ namespace WindowsChat
             try
             {
                 IPAddress address = IPAddress.Parse("127.0.0.1");
-                listener = new TcpListener(address, port);
+                listener = new TcpListener(IPAddress.Any, port);
                 listener.Start();
                 MessageBox.Show("Server created");
                 StartAccept();
@@ -62,65 +63,82 @@ namespace WindowsChat
 
         private void StartAccept()
         {
-            listener.BeginAcceptSocket(HandleAsyncConnection, listener);
+            if (!closing)
+            {
+                try
+                {
+                    listener.BeginAcceptTcpClient(HandleAsyncConnection, listener);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
 
         }
 
         private void HandleAsyncConnection(IAsyncResult result)
         {
-            
-            StartAccept();
-            Socket client = listener.EndAcceptSocket(result);
-
-            while (true)
+            if (!closing)
             {
-                try
+                StartAccept();
+                TcpClient client = listener.EndAcceptTcpClient(result);
+                NetworkStream stream = client.GetStream();
+                streams.Add(stream);
+                while (true)
                 {
-                    byte[] message = new byte[255];
-                    int count = client.Receive(message);
-                    PacketType type = parsePacketType(message);
-                    string msg = parseMessage(message);
-
-                    switch (type)
+                    try
                     {
-                        case PacketType.LOGIN:
-                            connectedUsers.Add(msg, client);
-                            broadcast(msg + " connected!");
-                            break;
-                        case PacketType.DISCONNECT:
-                            connectedUsers.Remove(msg);
-                            broadcast(msg + " disconnected!");
-                            break;
-                        case PacketType.MESSAGE:
-                            foreach (KeyValuePair<string, Socket> item in connectedUsers)
+                        byte[] message = new byte[255];
+
+                        int count = stream.Read(message, 0, message.Length);
+
+                        if (count > 0)
+                        {
+                            PacketType type = parsePacketType(message);
+                            string msg = parseMessage(message);
+
+                            switch (type)
                             {
-                                if (item.Value == client)
-                                {
-                                    broadcast(item.Key + ": " + msg);
-                                }
+                                case PacketType.LOGIN:
+
+                                    connectedUsers.Add(msg, client);
+                                    broadcast(msg + " connected!");
+                                    break;
+                                case PacketType.DISCONNECT:
+                                    connectedUsers.Remove(msg);
+                                    broadcast(msg + " disconnected!");
+                                    closing = true;
+                                    break;
+                                case PacketType.MESSAGE:
+                                    foreach (KeyValuePair<string, TcpClient> item in connectedUsers)
+                                    {
+                                        if (item.Value == client)
+                                        {
+                                            broadcast(item.Key + ": " + msg);
+                                        }
+                                    }
+                                    break;
+                                case PacketType.INVALID:
+                                    MessageBox.Show("INVALID PACKET: " + msg);
+                                    break;
                             }
+                        }
+                        if (closing)
+                        {
                             break;
-                        case PacketType.INVALID:
-                            MessageBox.Show("INVALID PACKET: " + msg);
-                            break;
-                    }
+                        }
 
-                    if (closing)
+                    }
+                    catch (Exception e)
                     {
-                        closeSockets();
-                        break;
+                        MessageBox.Show(e.StackTrace);
                     }
 
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.StackTrace);
-                }
 
-
+                
             }
-            listener.Stop();
-
         }
 
         private PacketType parsePacketType(byte[] data)
@@ -164,7 +182,9 @@ namespace WindowsChat
                 {
                     ASCIIEncoding ascii = new ASCIIEncoding();
                     byte[] data = ascii.GetBytes(msg);
-                    user.Value.Send(data);
+                    NetworkStream stream = user.Value.GetStream();
+                    stream.Write(data, 0, data.Length);
+
                 }
                 catch (Exception ex)
                 {
@@ -173,19 +193,11 @@ namespace WindowsChat
             }
 
         }
-        private void closeSockets()
-        {
-            foreach (var user in connectedUsers)
-            {
-                user.Value.Close();               
-            }
-            connectedUsers.Clear();
-            listener.Stop();
-        }
 
         public void close()
         {
             closing = true;
+            listener.Stop();
         }
     }
 

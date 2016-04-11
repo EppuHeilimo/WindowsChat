@@ -34,7 +34,7 @@ namespace WindowsChat
                 if (ipBox.Text != "" && portBox.Text != "" && channelBox.Text != "" && nickBox.Text != "")
                 {
                     BLChannels.connections.Insert(0, new BLConnection(ipBox.Text, Convert.ToInt32(portBox.Text), channelBox.Text, nickBox.Text));
-                    parentwindow.addTab();
+                    BLChannels.connections[0].setTab(parentwindow.addTab());
                     Close();
                 }
                 else
