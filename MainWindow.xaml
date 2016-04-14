@@ -55,7 +55,7 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
             <MenuItem Header="File">
-                <MenuItem Header="Exit"/>
+                <MenuItem Header="Exit" Click="MenuItemExit_OnClick"/>
             </MenuItem>
             <MenuItem Header="Bookmark">
                 <MenuItem Header="Add server to bookmarks"/>

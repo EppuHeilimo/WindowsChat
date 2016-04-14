@@ -27,7 +27,7 @@ namespace WindowsChat
         private Int32 port;
         private Thread server;
         private List<NetworkStream> streams = new List<NetworkStream>(); 
-        private bool closing = false;
+        private bool serverClosing = false;
         TcpListener listener;
 
         public Server()
@@ -63,7 +63,7 @@ namespace WindowsChat
 
         private void StartAccept()
         {
-            if (!closing)
+            if (!serverClosing)
             {
                 try
                 {
@@ -79,8 +79,9 @@ namespace WindowsChat
 
         private void HandleAsyncConnection(IAsyncResult result)
         {
-            if (!closing)
+            if (!serverClosing)
             {
+                bool closing = false;
                 StartAccept();
                 TcpClient client = listener.EndAcceptTcpClient(result);
                 NetworkStream stream = client.GetStream();
@@ -101,9 +102,16 @@ namespace WindowsChat
                             switch (type)
                             {
                                 case PacketType.LOGIN:
-
-                                    connectedUsers.Add(msg, client);
-                                    broadcast(msg + " connected!");
+                                    if (!connectedUsers.ContainsKey(msg))
+                                    {
+                                        connectedUsers.Add(msg, client);
+                                        broadcast(msg + " connected!");
+                                    }
+                                    else
+                                    {
+                                        sendBack("Username in use on the channel!", stream);
+                                        closing = true;
+                                    }
                                     break;
                                 case PacketType.DISCONNECT:
                                     connectedUsers.Remove(msg);
@@ -124,7 +132,7 @@ namespace WindowsChat
                                     break;
                             }
                         }
-                        if (closing)
+                        if (closing || serverClosing)
                         {
                             break;
                         }
@@ -194,9 +202,26 @@ namespace WindowsChat
 
         }
 
+        public void sendBack(string msg, NetworkStream stream)
+        {
+
+            try
+            {
+                ASCIIEncoding ascii = new ASCIIEncoding();
+                byte[] data = ascii.GetBytes(msg);
+                stream.Write(data, 0, data.Length);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
+
+        }
+
         public void close()
         {
-            closing = true;
+            serverClosing = true;
             listener.Stop();
         }
     }

@@ -83,7 +83,6 @@ namespace WindowsChat
             try
             {
                 //tcpclient.Connect(ip, port);
-                MessageBox.Show("Connected to " + ip);
                 sendTCP("0" + nick);
                 while (true)
                 {

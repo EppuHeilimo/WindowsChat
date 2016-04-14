@@ -22,7 +22,6 @@ namespace WindowsChat
     public partial class MainWindow : Window
     {
         static public List<TabItem> tabs = new List<TabItem>();
-        private string ChatContent;
        
         public MainWindow()
         {
@@ -82,8 +81,15 @@ namespace WindowsChat
                 {
                     BLChannels.disconnect();
                 }
+                else if (MessageBox.Text == "/shutdown")
+                {
+                    if (BLChannels.myServer != null)
+                        BLChannels.myServer.close();
+                    BLChannels.disconnect();
+                }
                 else if (MessageBox.Text != "")
                     BLChannels.connections[BLChannels.currentChannel].sendTCP("1" + MessageBox.Text);
+
             }
             else
             {
@@ -99,11 +105,16 @@ namespace WindowsChat
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            close_all();
+        }
+
+        private void close_all()
+        {
             foreach (var item in BLChannels.connections)
             {
                 item.close();
             }
-            if(BLChannels.myServer != null)
+            if (BLChannels.myServer != null)
                 BLChannels.myServer.close();
         }
 
@@ -113,6 +124,12 @@ namespace WindowsChat
             {
                 handleSend();
             }
+        }
+
+        private void MenuItemExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            close_all();
+            Close();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace WindowsChat
                 TextBlock block = (TextBlock)scroll.Content;
                 block.Text = str;
                 MainWindow.Scroll.ScrollToBottom();
-
+               
             }
             catch (Exception ex)
             {
