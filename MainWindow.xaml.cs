@@ -112,6 +112,7 @@ namespace WindowsChat
         {
             foreach (var item in BLChannels.connections)
             {
+                item.disconnect();
                 item.close();
             }
             if (BLChannels.myServer != null)

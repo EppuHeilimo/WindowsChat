@@ -102,7 +102,6 @@ namespace WindowsChat
                         break;
                     }    
                 }
-
             }
             catch (Exception ex)
             {
